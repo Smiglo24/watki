@@ -1,0 +1,55 @@
+Twoim zadaniem jest napisać program w Javie, który będzie obsługiwał system faktur i płatności.
+Program powinien umożliwić wystawianie faktur klientom indywidualnym oraz firmom, zarządzanie
+pozycjami faktury, a także wyszukiwanie i agregację danych.
+
+Na potrzeby zadania stwórz:
+Klasę Client - id, name, email
+Klasę CompanyClient - NIP (walidowany regexem, niepoprawny = wyjątek)
+Klasę PrivateClient - firstName, lastName
+
+Klasę Invoice - invoiceNumber, client, issueDate (LocalDate), dueDate (LocalDate), lista pozycji, InvoiceStatus
+Klasę VatInvoice - faktura z VAT
+Klasę ProformaInvoice - faktura bez VAT
+Klasę InvoiceItem - name, quantity, unitPrice (BigDecimal)
+Enum InvoiceStatus - NEW, PAID, OVERDUE, CANCELLED
+
+Różnice w zachowaniu VatInvoice i ProformaInvoice MUSZĄ wynikać z polimorfizmu.
+Do pieniędzy używaj wyłącznie BigDecimal (zakaz double).
+
+Stwórz metody w Invoice:
+calculateNet() -> oblicza sumę netto wszystkich pozycji
+calculateVat() -> oblicza kwotę VAT (różne zachowanie w zależności od typu faktury)
+calculateGross() -> oblicza kwotę brutto
+isOverdue() -> sprawdza czy faktura jest po terminie płatności
+
+Stwórz własne wyjątki:
+InvalidNipException (unchecked) -> niepoprawny format NIP
+InvoiceNotFoundException (checked) -> brak faktury o podanym numerze
+InvalidInvoiceOperationException (unchecked) -> np. próba zapłaty anulowanej faktury
+
+Stwórz klasę InvoiceService przechowującą listę faktur:
+addInvoice(Invoice invoice) -> dodaje fakturę do systemu
+removeInvoice(String invoiceNumber) -> usuwa fakturę po numerze (obsłuż brak faktury)
+markAsPaid(String invoiceNumber) -> oznacza fakturę jako zapłaconą (obsłuż anulowane faktury)
+
+getInvoiceByNumber(String invoiceNumber) -> zwraca fakturę o podanym numerze
+getInvoicesByClient(Client client) -> zwraca faktury danego klienta
+getInvoicesFromPeriod(LocalDate from, LocalDate to) -> zwraca faktury z podanego okresu
+getOverdueInvoices() -> zwraca faktury, których termin płatności już minął
+
+getTotalGross() -> zwraca sumę kwot brutto wszystkich faktur
+getTotalGrossByClient(Client client) -> zwraca sumę kwot brutto dla danego klienta
+getTotalGrossFromPeriod(LocalDate from, LocalDate to) -> zwraca sumę kwot brutto z danego okresu
+countByStatus(InvoiceStatus status) -> zwraca liczbę faktur o danym statusie
+
+getInvoicesAboveAmount(BigDecimal amount) -> zwraca faktury o kwocie brutto powyżej podanej wartości
+getInvoicesWithAtLeastItems(int count) -> zwraca faktury zawierające co najmniej podaną liczbę pozycji
+//getInvoicesByType(type) -> zwraca faktury określonego typu (VatInvoice lub ProformaInvoice)
+
+getInvoicesSortedByIssueDate(boolean sortAscending) -> zwraca faktury posortowane według daty wystawienia
+getInvoicesSortedByGrossDescending() -> zwraca faktury posortowane według kwoty brutto malejąco
+getInvoicesSortedByClientName() -> zwraca faktury posortowane według nazwy klienta
+
+Stwórz klasę InvoiceFileRepository:
+saveToFile(List<Invoice> invoices, String filePath) -> zapisuje listę faktur do pliku w formacie CSV
+loadFromFile(String filePath) -> wczytuje listę faktur z pliku

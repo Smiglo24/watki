@@ -1,0 +1,61 @@
+Twoim zadaniem jest napisać program w Javie, który będzie przechowywał informacje o książkach oraz autorach.
+Program powinien umożliwić dodawanie nowych książek i autorów, wyświetlanie listy książek posortowanej według tytułu,
+a także wyświetlanie listy autorów posortowanej według nazwiska.
+
+Na potrzeby zadania stwórz:
+Klasę Author - imie i nazwisko
+Klasę Book - tytuł, autorzy, cena
+Klasę Library - przechowuje listę książek i mapę w postaci AUTHOR - LIST<BOOK>
+
+Stwórz metody:
+addAuthor(Author a) -> dodaje nowego autora do biblioteki
+addBook(Book b) -> dodaje nową książkę do biblioteki
+getBooksSortedByTitle(boolean sortAscending)
+getAuthorsSortedByLastName(boolean sortAscending) -> najpierw po nazwisku, następnie po imieniu (thenComparing() z Comparator)
+getAuthorsWithMultipleBooks() -> zwraca listę autorów, którzy napisali więcej niż jedną książkę (groupingBy() z Collectors())
+getBooksSortedByPrice(boolean sortAscending)
+getBooksByAuthor(Author author) -> zwraaca listę książek napisanych przez danego autora
+removeBook(Book book) -> usuwa książkę z biblioteki (obsłuż sytuację jak takiej książki nie ma)
+removeAuthor(Author author) -> usuwa autora z biblioteki (obsłuż sytuację jak takiego nie ma)
+
+getMostExpensiveBook() -> zwraca najdroższą książkę w bibliotece
+getCheapestBook() -> zwraca najtańszą książkę w bibliotece
+getAverageBookPrice() -> zwraca średnią cenę wszystkich książek (jeśli brak książek, zwróć 0)
+getAuthorsSortedByNumberOfBooks(boolean sortAscending) -> sortuje autorów według liczby napisanych książek (dla remisu sortuj po nazwisku i imieniu)
+getBooksContainingTitleFragment(String fragment) -> zwraca książki, których tytuł zawiera podany fragment (ignoruj wielkość liter)
+getBooksInPriceRange(double min, double max) -> zwraca książki o cenie pomiędzy min a max (włącznie), obsłuż sytuację gdy min > max
+renameAuthor(Author author, String newFirstName, String newLastName) -> aktualizuje dane autora w bibliotece i w jego książkach (zadbaj o poprawną aktualizację kluczy w mapie)
+increaseBookPrices(double percentage) -> zwiększa ceny wszystkich książek o podany procent (obsłuż wartości ujemne)
+removeBooksByAuthor(Author author) -> usuwa wszystkie książki danego autora z biblioteki oraz aktualizuje mapę AUTHOR -> LIST<BOOK>
+getCoAuthors(Author author) -> zwraca listę autorów, którzy współtworzyli książki z podanym autorem (bez duplikatów)
+getTopNAuthorsByBookCount(int n) -> zwraca n autorów z największą liczbą książek (jeśli n większe niż liczba autorów, zwróć wszystkich)
+hasAuthorWrittenBook(Author author, String bookTitle) -> sprawdza, czy autor napisał książkę o podanym tytule
+
+*** ROZSZERZ OBECNE KLASY ***
+- Author -> int yearOfBirth
+- Book -> int yearPublished
+       -> Genre genre (FANTASY, SCI-FI, DRAMAT itp..)
+       -> int pages
+Pamiętaj aby zaaktualizować konstruktory i toString()
+
+Zaimplementuj nmowe metody
+
+getBooksPublishedAfter(int year) -> zwraca listę książek wydanych po podanym roku
+getBooksGroupedByGenre() -> zwraca mapę gatunek -> lista książek (groupingBy z Collectors)
+getMostProlificAuthors(int limit) -> zwraca listę autorów, którzy mają największą łączną liczbę stron we wszystkich swoich książkach (sumowanie pages, sortowanie malejąco)
+getBooksByPageCountRange(int minPages, int maxPages) -> zwraca książki, których liczba stron mieści się w podanym zakresie
+getAveragePagesByGenre() -> zwraca mapę gatunek -> średnia liczba stron w książkach tego gatunku
+getAuthorsBornBefore(int year) -> zwraca autorów urodzonych przed danym rokiem
+getBooksSortedByPublicationYear(boolean sortAscending) -> zwraca książki posortowane według roku wydania
+getOldestBook() -> zwraca najstarszą (najwcześniej wydaną) książkę w bibliotece
+getGenresWithMoreThan(int count) -> zwraca listę gatunków, które mają więcej niż podana liczba książek
+
+
+getAuthorsByGenre(String genre) -> zwraca listę autorów, którzy napisali książki wskazanego gatunku (bez duplikatów)
+getBooksPartitionedByPrice(double threshold) -> zwraca mapę Boolean -> lista książek, podział na droższe i tańsze od progu
+getAuthorsWithBooksInGenre(String genre) -> zwraca autorów, którzy mają co najmniej jedną książkę w danym gatunku
+getGenresSortedByAveragePrice() -> zwraca gatunki posortowane według średniej ceny książek
+getMostCommonGenre() -> zwraca gatunek, który występuje najczęściej w bibliotece
+getTotalPagesByAuthor(Author author) -> zwraca sumę stron napisanych przez danego autora
+findAuthorsWithAtLeastOneBookForEveryGenre() -> zwraca autorów, którzy napisali po jednej książce z każdego gatunku występującego w bibliotece
+getBooksWithUniqueGenres() -> zwraca książki, których gatunek występuje tylko raz w całej bibliotece
