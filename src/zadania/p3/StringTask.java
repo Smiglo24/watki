@@ -7,7 +7,7 @@ public class StringTask implements Runnable{
     private volatile TaskState state = TaskState.CREATED;
     private volatile boolean abortRequested = false;
 
-    private String result = " ";
+    private String result = "";
     private Thread thread;
 
     public StringTask(String text, int repetitions) {
