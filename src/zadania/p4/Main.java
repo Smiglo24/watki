@@ -63,18 +63,34 @@ public class Main {
 
 
         System.out.println(result);
+        /* *
+         * Napisz wątek, który wypisuje liczby od 10 do 1, jedną co pół sekundy.
+         * main uruchamia wątek, czeka 2 sekundy i przerywa go przez interrupt().
+         * Po przerwaniu wątek wypisuje "Przerwano" i kończy pracę, nie dochodząc do 1.
+         *
+         * Przykładowy wynik:
+         *   10
+         *   9
+         *   8
+         *   7
+         *   Przerwano
+         */
+        //todo
+        Thread thread=new Thread(()->{
+            for (int i = 10; i >=1 ; i--) {
+                try {
+                    Thread.sleep(500);
+                    System.out.println(i);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException("przerwano");
+                }
+
+            }
+        });
+        thread.start();
+        Thread.sleep(2000);
+        thread.interrupt();
     }
 
-    /* *
-             * Napisz wątek, który wypisuje liczby od 10 do 1, jedną co pół sekundy.
-            * main uruchamia wątek, czeka 2 sekundy i przerywa go przez interrupt().
-            * Po przerwaniu wątek wypisuje "Przerwano" i kończy pracę, nie dochodząc do 1.
-            *
-            * Przykładowy wynik:
-            *   10
-            *   9
-            *   8
-            *   7
-            *   Przerwano
- */
+
 }
