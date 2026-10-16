@@ -82,7 +82,8 @@ public class Main {
                     Thread.sleep(500);
                     System.out.println(i);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException("przerwano");
+                    System.out.println("przerwano");
+                    break;
                 }
 
             }
