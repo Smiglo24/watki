@@ -82,20 +82,16 @@ public class Main {
         }
     }
     private static int readInt(String prompt) {
-        while (true) {
             return Integer.parseInt(readText(prompt));
-        }
+
     }
     private static LocalDateTime readDateTime() {
-        while (true) {
             return LocalDateTime.parse(readText("data i godzina (yyyy-MM-dd HH:mm): "),FORMAT);
-        }
     }
 
     private static Client getClient() {
         int id = readInt("client id ");
-        Client client = clients.get(id);
-        return client;
+        return clients.get(id);
     }
 
     private static void showSchedule() {
