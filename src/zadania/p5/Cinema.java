@@ -34,4 +34,30 @@ public class Cinema {
     public void setHallList(List<Hall> hallList) {
         this.hallList = hallList;
     }
+
+    public Seance getSeance(int id) {
+        return seanceList.get(id-1);
+    }
+    public Hall getHall(int id){
+        for(Hall hall:hallList){
+            if(hall.getId()==id){
+                return hall;
+            }
+        }
+    return null;
+    }
+
+    public void addSeance(Seance seance) {
+        seanceList.add(seance);
+    }
+
+    public List<Seance> findSeancesForFilm(String title) {
+        List<Seance> result = new ArrayList<>();
+        for (Seance seance : seanceList) {
+            if (seance.getFilm().getTitle().equalsIgnoreCase(title.trim())) {
+                result.add(seance);
+            }
+        }
+        return result;
+    }
 }

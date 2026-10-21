@@ -6,7 +6,7 @@ import java.util.List;
 public class Client {
     private int id;
     private String name;
-    private List<Ticket> tickets=new ArrayList<>();
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Client(int id, String name) {
         this.id = id;
@@ -37,11 +37,15 @@ public class Client {
         this.name = name;
     }
 
-    public List<Ticket> getTickets() {
+    public synchronized List<Ticket> getTickets() {
         return tickets;
     }
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public synchronized void addTicket(Ticket ticket) {
+        tickets.add(ticket);
     }
 }

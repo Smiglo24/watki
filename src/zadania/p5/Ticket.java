@@ -5,11 +5,12 @@ public abstract class  Ticket {
     private double price;
     private Seance seance;
     private Client client;
-
-    public Ticket(int id, double price, Seance seance) {
+    private int seatNumber;
+    public Ticket(int id, double price, Seance seance,int seatNumber) {
         this.id = id;
         this.price = price;
         this.seance = seance;
+        this.seatNumber=seatNumber;
 
     }
 
@@ -18,11 +19,24 @@ public abstract class  Ticket {
         return "Ticket{" +
                 "id=" + id +
                 ", price=" + price +
-                ", seance=" + seance +
-                ", client=" + client +
-                '}';
+                ", seance=" + seance;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public String reserve(Client client) {
+        return seance.reserve(this, client);
+    }
     public int getId() {
         return id;
     }
@@ -31,11 +45,16 @@ public abstract class  Ticket {
         this.id = id;
     }
 
-    public double getPrice() {
-        return price;
+    public abstract double getPrice();
+    public abstract String getType();
+    public void assignClient(Client client){
+        this.client=client;
     }
 
-    public void setPrice(double price) {
+    public double getBasePrice(){
+        return price;
+    }
+    public void setBasePrice(double price) {
         this.price = price;
     }
 
