@@ -45,7 +45,7 @@ public class Main {
     }
     private static void createInitialData() {
         Hall hall1 = new Hall(1, 20);
-        Hall hall2 = new Hall(2, 15);
+        Hall hall2 = new Hall(2, 1);
         cinema = new Cinema(List.of(hall1, hall2));
         Film film1 = new Film("Adam", "lot");
         Film film2 = new Film("Andrew", "gwiezdne wojny");
